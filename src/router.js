@@ -1,23 +1,55 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import HomeSideBar from './components/Home/HomeSideBar.vue'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
+  linkActiveClass: 'active',
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      redirect: HomeSideBar
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/home',
+      component: HomeSideBar,
+      children: [
+        { path: '/home/index', component: () => import(/* webpackChunkName: "about" */ './components/Home/HomeIndex.vue') },
+        { path: '/home/customerList', component: () => import(/* webpackChunkName: "about" */ './components/Home/CustomerList.vue') },
+        { path: '/home/manage', component: () => import(/* webpackChunkName: "about" */ './components/Home/manage.vue') },
+        { path: '/home/saleinfo', component: () => import(/* webpackChunkName: "about" */ './components/Home/saleInfo.vue') },
+        { path: '/', redirect: 'index' }
+      ]
+    },
+    {
+      path: '/customer',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: () => import(/* webpackChunkName: "about" */ './components/Customer/CustomerSideBar.vue'),
+      children: [
+        { path: '/customer/index', component: () => import(/* webpackChunkName: "about" */ './components/Customer/CustomerIndex.vue') },
+        { path: '/customer/customerList', component: () => import(/* webpackChunkName: "about" */ './components/Customer/CustomerList.vue') },
+        { path: '/', redirect: 'index' }
+      ]
+    },
+    {
+      path: '/bussiness',
+      name: 'bussiness',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './components/BussinessSideBar.vue')
+    },
+    {
+      path: '/order',
+      name: 'order',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './components/OrderSideBar.vue')
     }
   ]
 })
