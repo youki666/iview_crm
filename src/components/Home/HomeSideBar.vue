@@ -40,13 +40,10 @@ export default {
       text-align: center;
       .ivu-menu-item-group-title {
           font-size: 36px;
-          padding-left: 0;
       }
     }
     .content {
         flex: 1;
-        height: 666px;
-        border: 1px solid gray;
     }
 }
 </style>
