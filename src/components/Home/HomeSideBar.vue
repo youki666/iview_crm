@@ -10,7 +10,7 @@
                             客户列表
                         </MenuItem>
                         <MenuItem name="3" to='/home/manage'>
-                            客户管理
+                            客户筛选
                         </MenuItem>
                         <MenuItem name="4" to='/home/saleinfo'>
                             销售线索
@@ -38,9 +38,6 @@ export default {
     display: flex;
     .sidebar {
       text-align: center;
-      .ivu-menu-item-group-title {
-          font-size: 36px;
-      }
     }
     .content {
         flex: 1;

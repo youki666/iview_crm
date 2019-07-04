@@ -13,12 +13,14 @@
                 <p class='title' slot="title">快速新建</p>
                  <div>
                    <ul class='new'>
-                     <li>
+                    <router-link to="/home/newcustomer">
+                      <li>
                         <div>
                           <p class='icon'><Icon type="md-people" size="48"/></p>
                           <p class='name'>新建客户</p>
                         </div>
                      </li>
+                    </router-link>
                      <li>
                         <div>
                           <p class='icon'><Icon type="md-people" size="48"/></p>
@@ -131,7 +133,7 @@
                             </p>
                             <div class="infos">
                                 <ul>
-                                  <li><span class="info">【内部分享】如何建立良好的客户关系</span><span class="time"> <Icon type="ios-clock" />2019-04-10 09:00</span></li>
+                                  <li><span class="info" @click="modal2=true">【内部分享】如何建立良好的客户关系</span><span class="time"> <Icon type="ios-clock" />2019-04-10 09:00</span></li>
                                   <li><span class="info">【内部分享】如何建立良好的客户关系</span><span class="time"> <Icon type="ios-clock" />2019-04-10 09:00</span></li>
                                   <li><span class="info">【内部分享】如何建立良好的客户关系</span><span class="time"> <Icon type="ios-clock" />2019-04-10 09:00</span></li>
                                   <li><span class="info">【内部分享】如何建立良好的客户关系</span><span class="time"> <Icon type="ios-clock" />2019-04-10 09:00</span></li>
@@ -301,9 +303,6 @@
                                         <Option value="2021"></Option>
                                     </Select>
                                  </div>
-                                 <div class="timer">
-
-                                 </div>
                             </div>
                         </Card>
                     </Col>
@@ -314,6 +313,12 @@
         <BackTop :height="100" :bottom="200">
            
         </BackTop>
+        <Modal
+        title="公告详情"
+        v-model="modal2"
+        class-name="vertical-center-modal">
+        <p class="title"> <span></span>  如何建立长久的客户关系</p>
+    </Modal>
   </div>
 </template>
 
@@ -324,7 +329,7 @@ export default {
   name: 'homeindex',
   data() {
     return {
-
+      modal2: false
     }
   },
   mounted () {
@@ -650,6 +655,7 @@ export default {
         width: 120px;
         height: 120px;
         position: relative;
+        color: #999;
         div {
           width: 60px;
           height: 60px;
@@ -699,6 +705,10 @@ export default {
         border-bottom: 1px solid #f3f3f3;
         .info {
            margin-right: 120px;
+           &:hover {
+             color:#999;
+             cursor: pointer;
+           }
         }
       }
     }
