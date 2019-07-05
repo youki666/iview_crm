@@ -102,8 +102,8 @@
       </div>
     </div>
     <Modal v-model="modal6" title="批量编辑" :loading="loading" class-name="vertical-center-modal" ok-text="保存"
-      width="600px" @on-ok="asyncOK">
-      <editPage></editPage>
+      width="600px" @on-ok="handleSubmit" @on-cancel="handleReset">
+      <editPage ref="editPage" ></editPage>
     </Modal>
   </div>
 </template>
@@ -317,10 +317,11 @@ import editPage from './editPage'
       handleSelectAll(status) {
         this.$refs.selection.selectAll(status);
       },
-      asyncOK() {
-        setTimeout(() => {
-          this.modal6 = false;
-        }, 2000);
+      handleSubmit() {
+        this.$refs.editPage.handleSubmit('formValidate')
+      },
+      handleReset(name) {
+        this.$refs.editPage.handleReset('formValidate')
       }
     }
   }

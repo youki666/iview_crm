@@ -131,9 +131,9 @@
                 <Icon type="ios-close" size='24' /></Button>
               <Button type='default' style="margin-right:10px;">全部
                 <Icon type="ios-close" size='24' /></Button>
-                <Button type='text' style="margin-right:10px;">全部</Button>
-                 <Button type='text' style="margin-right:10px;">全部</Button>
-              
+              <Button type='text' style="margin-right:10px;">全部</Button>
+              <Button type='text' style="margin-right:10px;">全部</Button>
+
             </div>
           </div>
         </Card>
@@ -187,14 +187,14 @@
       </div>
     </div>
     <Modal v-model="modal6" title="批量编辑" :loading="loading" class-name="vertical-center-modal" ok-text="保存"
-      width="600px" @on-ok="asyncOK">
-      <editPage></editPage>
+      width="600px" @on-ok="handleSubmit" @on-cancel="handleReset">
+      <editPage ref='editPage'></editPage>
     </Modal>
   </div>
 </template>
 
 <script>
-import editPage from './editPage'
+  import editPage from './editPage'
   export default {
     name: 'manage',
     components: {
@@ -203,7 +203,7 @@ import editPage from './editPage'
     data() {
       return {
         valueDisabled: 4.3,
-        loading: false,
+        loading: true,
         modal6: false,
         columns4: [{
             type: 'selection',
@@ -392,65 +392,71 @@ import editPage from './editPage'
       }
     },
     methods: {
-        handleSelectAll(status) {
+      handleSelectAll(status) {
         this.$refs.selection.selectAll(status);
+      },
+      handleSubmit() {
+        this.$refs.editPage.handleSubmit('formValidate')
+      },
+      handleReset(name) {
+        this.$refs.editPage.handleReset('formValidate')
       }
     }
-  }
-
+  } 
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-  .manage {
-    background: #f0f2f5;
+.manage {
+  background: #f0f2f5;
 
-    .header {
-      display: inline-block;
-      padding: 16px 0 0 16px;
-      width: 100%;
-      height: 50px;
-      background: #fff;
+  .header {
+    display: inline-block;
+    padding: 16px 0 0 16px;
+    width: 100%;
+    height: 50px;
+    background: #fff;
 
-      .left {
-        float: left;
-        height: 20px;
-        line-height: 20px;
-      }
-
-      .right {
-        float: right;
-        height: 20px;
-        line-height: 20px;
-
-        .back,
-        .refresh {
-          margin-right: 20px;
-        }
-      }
+    .left {
+      float: left;
+      height: 20px;
+      line-height: 20px;
     }
 
-    .content {
+    .right {
+      float: right;
+      height: 20px;
+      line-height: 20px;
 
-      .top {
-        background: #eee;
-        padding: 20px 120px;
+      .back,
+      .refresh {
+        margin-right: 20px;
+      }
+    }
+  }
 
-        .search {
-          margin-right: 20px;
-        }
+  .content {
 
-        .settings {
-          div {
-            height: 40px;
-            line-height: 40px;
+    .top {
+      background: #eee;
+      padding: 20px 120px;
 
-            span {
-              display: inline-block;
-              width: 120px;
-            }
+      .search {
+        margin-right: 20px;
+      }
+
+      .settings {
+        div {
+          height: 40px;
+          line-height: 40px;
+
+          span {
+            display: inline-block;
+            width: 120px;
           }
         }
+      }
+
       .table {
         margin-top: 20px;
         background: #fff;
@@ -464,11 +470,8 @@ import editPage from './editPage'
           }
         }
       }
-      }
-
-
-
     }
   }
+}
 
 </style>

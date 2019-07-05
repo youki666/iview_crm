@@ -10,7 +10,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: HomeSideBar
+      redirect: '/home'
     },
     {
       path: '/home',
@@ -20,9 +20,9 @@ export default new Router({
         { path: '/home/customerList', component: () => import(/* webpackChunkName: "about" */ './components/Home/CustomerList.vue') },
         { path: '/home/manage', component: () => import(/* webpackChunkName: "about" */ './components/Home/manage.vue') },
         { path: '/home/saleinfo', component: () => import(/* webpackChunkName: "about" */ './components/Home/saleInfo.vue') },
-        { path: '/home/newcustomer', component: () => import(/* webpackChunkName: "about" */ './components/Home/newCustomer.vue') },
-        { path: '/', redirect: 'index' }
-      ]
+        { path: '/home/newcustomer', component: () => import(/* webpackChunkName: "about" */ './components/Home/newCustomer.vue') }
+      ],
+      redirect: '/home/index'
     },
     {
       path: '/customer',

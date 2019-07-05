@@ -1,26 +1,26 @@
 <template>
     <div class='header'>
-        <Menu mode="horizontal" :theme="theme1" :active-name="initialActiveMenu" ref='menu' @on-select="getName">
+        <Menu mode="horizontal" :theme="theme1"  ref='menu' @on-select="getName">
             <MenuItem name="1" class='title'>
                 <Icon  type="logo-wordpress" size='56'/>
                 客户关系管理系统
             </MenuItem>
-             <MenuItem name="home" to='/home'>
+             <router-link name="home" to='/home'>
                 <Icon type="md-menu" size='24'/>
                 菜单
-            </MenuItem>
-             <MenuItem name="customer" to='/customer'>
+            </router-link>
+             <router-link name="customer" to='/customer'>
                 <Icon type="ios-people" size='24'/>
                 客户
-            </MenuItem>
-            <MenuItem name="bussiness" to='/bussiness'>
+            </router-link>
+            <router-link name="bussiness" to='/bussiness'>
                 <Icon type="md-copy" size='24'/>
                 商机
-            </MenuItem>
-            <MenuItem name="order" to='/order'>
+            </router-link>
+            <router-link name="order" to='/order'>
                 <Icon type="ios-people" size='24'/>
                 订单
-            </MenuItem>
+            </router-link>
         </Menu>
     </div>
 </template>
@@ -29,14 +29,7 @@ export default {
     data() {
         return {
             theme1: 'primary',
-            initialActiveMenu: 'active'
         }
-    },
-    mounted () {
-        this.$nextTick(() => {
-            this.initialActiveMenu = this.$route.path.slice(1);
-            this.$refs.menu.updateActiveName()
-        })
     },
     methods :{
         getName(name){
@@ -52,12 +45,21 @@ export default {
        font-size: 18px;
        font-weight: bold;
     }
+    a {
+        display: inline-block;
+        width: 130px;
+        height: 60px;
+        text-align: center;
+        background: #2d8cf0;
+        color: #fff;
+    }
     a:not(:first-child):hover {
        background: #3f76b2;
        font-weight: bold;
     }
-    .ivu-menu-item-active {
+    .active {
         background: #3f76b2;
+        
     }
 }
 </style>
