@@ -1,60 +1,14 @@
 <template>
   <div class="customerlist">
-    <div class="header">
-      <Breadcrumb separator=">">
-        <BreadcrumbItem>
-          <Icon type="logo-buffer" size="24" />
-        </BreadcrumbItem>
-        <BreadcrumbItem>一级分类</BreadcrumbItem>
-        <BreadcrumbItem>客户列表</BreadcrumbItem>
-      </Breadcrumb>
+    <div class="headerwrapper">
+      <homeHeader :name='name'></homeHeader>
     </div>
     <div class="content">
-      <div class="top">
-        <Card :bordered="false">
-          <p slot="title" class='title'>
-            <span v-for="(item, index) in list" :class="{active:Index==index}" :key="index"
-              @click="selected(index)">{{item}}</span>
-          </p>
-          <div class="tools">
-            <span><Input placeholder="搜索关键字" size="large" style="width: 180px" /></span>
-            <span>
-              <Select size="large" style="width:180px;margin-left:10px;" placeholder="客户状态">
-                <Option value="公司目标"></Option>
-                <Option value="子公司目标"></Option>
-                <Option value="集团目标"></Option>
-              </Select>
-            </span>
-            <span>
-              <Select size="large" style="width:180px;margin-left:10px;" placeholder="客户类型">
-                <Option value="公司目标"></Option>
-                <Option value="子公司目标"></Option>
-                <Option value="集团目标"></Option>
-              </Select>
-            </span>
-            <span>
-              <Select size="large" style="width:180px;margin-left:10px;" placeholder="客户星级">
-                <Option value="公司目标"></Option>
-                <Option value="子公司目标"></Option>
-                <Option value="集团目标"></Option>
-              </Select>
-            </span>
-            <span>
-              <DatePicker size="large" type="date" placeholder="最后跟进" style="width: 180px;margin-left:10px;">
-              </DatePicker>
-            </span>
-            <span><Button type="primary" style="width: 100px;margin-left:10px;font-size:16px;text-align:center">
-                <Icon type="ios-search" size='24' />查询</Button></span>
-            <span><Button type="default" style="width: 80px;margin-left:10px;font-size:16px;text-align:center">
-                <Icon type="ios-refresh" size='24' />重置</Button></span>
-            <span><Button type="text"
-                style="width: 120px;margin-left:10px;font-size:16px;text-align:center;color:#3293fe">
-                <Icon type="ios-funnel" size='24' />高级筛选</Button></span>
-          </div>
-        </Card>
+        <div class="toptopwrapper">
+          <Tools :list='list' :select='select'></Tools>
       </div>
       <div class='tablewrapper'>
-            <Tables></Tables>   
+            <Tables :buttonList='buttonList'></Tables> 
       </div>
     </div>
     
@@ -62,21 +16,29 @@
 </template>
 
 <script>
-//import homeHeader from './homeHeader'
-import Tables from './../Home/Table'
+import homeHeader from './homeHeader'
+import Tables from './Table'
+import Tools from './Tools'
   export default {
     name: 'customerlist',
     components: {
-     Tables
+     homeHeader,Tables,Tools
     },
     data() {
       return {
-        list: ['全部客户', '我的客户', '下属客户', '重点客户', '我协作的', '下属协作的'],
+        name: '全部商机',
+        list: ['全部商机', '我的商机', '下属商机',  '我协作的', '下属协作的','成交商机',],
+        select: [{placeholder:'客户状态', options:['开业','转让','倒闭']},{placeholder:'客户类型', options:['会员','超级会员','钻石会员']},{placeholder:'客户星级', options:['1星','2星','3星']}],
+        buttonList: [{name:'添加',buttontype:'primary',icontype:'ios-add',style:'width: 80px;margin-left:10px;font-size:16px;text-align:center'},
+                     {name:'导入',buttontype:'default',icontype:'ios-refresh',style:'width: 80px;margin-left:10px;font-size:16px;text-align:center'},
+                     {name:'导出',buttontype:'default',icontype:'md-download',style:'width: 80px;margin-left:10px;font-size:16px;text-align:center'},
+                     {name:'转移商机',buttontype:'default',icontype:'ios-options',style:'width: 120px;margin-left:10px;font-size:16px;text-align:center'},
+                     {name:'添加协作',buttontype:'default',icontype:'ios-build',style:'width: 120px;margin-left:10px;font-size:16px;text-align:center'},
+                     {name:'发送短信',buttontype:'default',icontype:'md-move',style:'width: 120px;margin-left:10px;font-size:16px;text-align:center'}],
         isActive: false,
         Index: 0,
         modal6: false,
         loading: true,
-        value1: '搜索关键词',
         columns4: [{
             type: 'selection',
             width: 60,
@@ -300,23 +262,17 @@ import Tables from './../Home/Table'
     }
 
     .content {
-      padding: 20px 180px;
+      padding: 80px 180px;
 
       .top {
         .ivu-card-head {
           background: #f9f9f9;
           font-size: 18px;
           font-weight: bold;
-          text-align: center;
-
-          .title {
-            display: flex;
-            text-align: center;
-          }
 
           span {
             display: inline-block;
-            flex: 1;
+            margin: 0 30px;
             font-weight: bold;
 
             &:hover {
@@ -330,7 +286,7 @@ import Tables from './../Home/Table'
         }
       }
       .tablewrapper {
-        margin-top: 10px;
+        margin-top: 20px;
       }
     }
   }
@@ -346,3 +302,5 @@ import Tables from './../Home/Table'
   }
 
 </style>
+
+

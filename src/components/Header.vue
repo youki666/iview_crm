@@ -21,6 +21,52 @@
                 <Icon type="ios-people" size='24'/>
                 订单
             </router-link>
+             <div class="right">
+                 <a href="#">
+                    <Dropdown>
+                    <a href="javascript:void(0)">
+                        <Icon type="md-contact" />
+                        事项
+                    <Badge :count="50" class='badge'>
+                        
+                    </Badge>
+                    </a>
+                    <DropdownMenu slot="list">
+                        <DropdownItem>修改资料</DropdownItem>
+                        <DropdownItem>修改头像</DropdownItem>
+                        <DropdownItem>修改密码</DropdownItem>
+                        <DropdownItem>退出系统</DropdownItem>
+                    </DropdownMenu>
+                    </Dropdown>
+                 </a>
+                 <a href="#">
+                     <Icon type="ios-lock" size='24'/>
+                    日程
+                </a>
+                 <a href="#">
+                     <Icon type="ios-lock" size='24'/>
+                    消息
+                </a>
+                 <a href="#">
+                     <Icon type="ios-lock" size='24'/>
+                    锁屏
+                </a>
+                <a href="#">
+                        <Dropdown>
+                    <a href="javascript:void(0)">
+                        <Icon type="md-contact" />
+                        Admin
+                        <Icon type="ios-arrow-down"></Icon>
+                    </a>
+                    <DropdownMenu slot="list">
+                            <DropdownItem>修改资料</DropdownItem>
+                            <DropdownItem>修改头像</DropdownItem>
+                            <DropdownItem>修改密码</DropdownItem>
+                            <DropdownItem>退出系统</DropdownItem>
+                    </DropdownMenu>
+                    </Dropdown>
+                </a>
+            </div>
         </Menu>
     </div>
 </template>
@@ -60,6 +106,26 @@ export default {
     .active {
         background: #3f76b2;
         
+    }
+    .right {
+        float:right;
+        a {
+        display: inline-block;
+        width: 130px;
+        height: 60px;
+        text-align: center;
+        background: #2d8cf0;
+        color: #fff;
+        &:hover {
+        background: #3f76b2;
+        font-weight: bold;
+        }
+        }
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
     }
 }
 </style>

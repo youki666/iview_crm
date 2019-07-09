@@ -15,6 +15,9 @@
                         <MenuItem name="4" to='/home/saleinfo'>
                             销售线索
                         </MenuItem>
+                        <MenuItem name="5" to='/home/allOpp'>
+                            全部商机
+                        </MenuItem>
                     </MenuGroup>
                 </Menu>
         </div>
@@ -40,6 +43,7 @@ export default {
       text-align: center;
     }
     .content {
+        position: relative;
         flex: 1;
     }
 }

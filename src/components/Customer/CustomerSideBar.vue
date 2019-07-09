@@ -41,8 +41,6 @@ export default {
     }
     .content {
         flex: 1;
-        height: 666px;
-        border: 1px solid gray;
     }
 }
 </style>

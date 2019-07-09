@@ -20,7 +20,8 @@ export default new Router({
         { path: '/home/customerList', component: () => import(/* webpackChunkName: "about" */ './components/Home/CustomerList.vue') },
         { path: '/home/manage', component: () => import(/* webpackChunkName: "about" */ './components/Home/manage.vue') },
         { path: '/home/saleinfo', component: () => import(/* webpackChunkName: "about" */ './components/Home/saleInfo.vue') },
-        { path: '/home/newcustomer', component: () => import(/* webpackChunkName: "about" */ './components/Home/newCustomer.vue') }
+        { path: '/home/newcustomer', component: () => import(/* webpackChunkName: "about" */ './components/Home/newCustomer.vue') },
+        { path: '/home/allOpp', component: () => import(/* webpackChunkName: "about" */ './components/Home/allOpp.vue') }
       ],
       redirect: '/home/index'
     },

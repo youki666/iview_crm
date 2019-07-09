@@ -1,126 +1,42 @@
 <template>
   <div class="customerlist">
-    <div class="header">
-      <Breadcrumb separator=">">
-        <BreadcrumbItem>
-          <Icon type="logo-buffer" size="24" />
-        </BreadcrumbItem>
-        <BreadcrumbItem>一级分类</BreadcrumbItem>
-        <BreadcrumbItem>客户列表</BreadcrumbItem>
-      </Breadcrumb>
+    <div class="headerwrapper">
+       <homeHeader :name='name'></homeHeader>
     </div>
     <div class="content">
-      <div class="top">
-        <Card :bordered="false">
-          <p slot="title" class='title'>
-            <span v-for="(item, index) in list" :class="{active:Index==index}" :key="index"
-              @click="selected(index)">{{item}}</span>
-          </p>
-          <div class="tools">
-            <span><Input v-model="value1" size="large" style="width: 180px" /></span>
-            <span>
-              <Select size="large" style="width:180px;margin-left:10px;" placeholder="客户状态">
-                <Option value="公司目标"></Option>
-                <Option value="子公司目标"></Option>
-                <Option value="集团目标"></Option>
-              </Select>
-            </span>
-            <span>
-              <Select size="large" style="width:180px;margin-left:10px;" placeholder="客户类型">
-                <Option value="公司目标"></Option>
-                <Option value="子公司目标"></Option>
-                <Option value="集团目标"></Option>
-              </Select>
-            </span>
-            <span>
-              <Select size="large" style="width:180px;margin-left:10px;" placeholder="客户星级">
-                <Option value="公司目标"></Option>
-                <Option value="子公司目标"></Option>
-                <Option value="集团目标"></Option>
-              </Select>
-            </span>
-            <span>
-              <DatePicker size="large" type="date" placeholder="最后跟进" style="width: 180px;margin-left:10px;">
-              </DatePicker>
-            </span>
-            <span><Button type="primary" style="width: 100px;margin-left:10px;font-size:16px;text-align:center">
-                <Icon type="ios-search" size='24' />查询</Button></span>
-            <span><Button type="default" style="width: 80px;margin-left:10px;font-size:16px;text-align:center">
-                <Icon type="ios-refresh" size='24' />重置</Button></span>
-            <span><Button type="text"
-                style="width: 120px;margin-left:10px;font-size:16px;text-align:center;color:#3293fe">
-                <Icon type="ios-funnel" size='24' />高级筛选</Button></span>
-          </div>
-        </Card>
+      <div class="topwrapper">
+          <Tools :list='list'  :select='select'></Tools>
       </div>
-      <div class='table'>
-        <div class="table-header">
-          <Button type="primary" style="width: 80px;margin-left:10px;font-size:16px;text-align:center">
-            <Icon type="ios-add" size='18' />添加</Button>
-          <Button type="default" style="width: 80px;margin-left:10px;font-size:16px;text-align:center">
-            <Icon type="ios-refresh" size='18' />导入</Button>
-          <Button type="default" style="width: 80px;margin-left:10px;font-size:16px;text-align:center;">
-            <Icon type="ios-funnel" size='18' />导出</Button>
-          <Button type="default" style="width: 120px;margin-left:10px;font-size:16px;text-align:center">
-            <Icon type="ios-add" size='18' />新建任务</Button>
-          <Button type="default" style="width: 120px;margin-left:10px;font-size:16px;text-align:center">
-            <Icon type="ios-refresh" size='18' />转移客户</Button>
-          <Button type="default" style="width: 120px;margin-left:10px;font-size:16px;text-align:center;">
-            <Icon type="ios-flag" size='18' />移入公海</Button>
-          <Button type="default" style="width: 120px;margin-left:10px;font-size:16px;text-align:center;">
-            <Icon type="ios-funnel" size='18' />合并客户</Button>
-
-          <Button type="default" style="width: 120px;margin-left:10px;font-size:16px;text-align:center"
-            @click="modal6 = true">
-            <Icon type="ios-add" size='18' />批量编辑</Button>
-
-          <Checkbox style="width: 80px;margin-left:10px;">跟进模式</Checkbox>
-          <Poptip word-wrap trigger="hover" content="当对列表客户写跟进时,会自动将刚刚写过跟进的客户排到最后。">
-            <Button>
-              <Icon type="md-help-circle" /></Button>
-          </Poptip>
-
-          <span><Button type="default"
-              style="width: 80px;margin-left:10px;font-size:16px;text-align:center;float:right;">
-              <Icon type="ios-funnel" size='18' />跟进</Button></span>
-          <span><Button type="default"
-              style="width: 80px;margin-left:10px;font-size:16px;text-align:center;float:right;">
-              <Icon type="ios-add" size='18' />列表</Button></span>
-        </div>
-        <div class="table-content">
-          <Table border ref="selection" :columns="columns4" :data="data1"></Table>
-          <div class="tools">
-            <Button @click="handleSelectAll(true)">
-              <Icon type="md-checkbox" />全选</Button>
-            <Button @click="handleSelectAll(false)" style="text-align:center;margin-left:10px;">
-              <Icon type="ios-browsers-outline" />反选</Button>
-            <Button style="text-align:center;margin-left:10px;">更多操作
-              <Icon type="ios-arrow-down" /></Button>
-            <Page :total="100" show-sizer style="text-align:center;float:right;" />
-          </div>
-        </div>
+      <div class='tablewrapper'>
+            <Tables :buttonList='buttonList'></Tables>
       </div>
     </div>
-    <Modal v-model="modal6" title="批量编辑" :loading="loading" class-name="vertical-center-modal" ok-text="保存"
-      width="600px" @on-ok="handleSubmit" @on-cancel="handleReset">
-      <editPage ref="editPage" ></editPage>
-    </Modal>
+    
   </div>
 </template>
 
 <script>
-//import homeHeader from './homeHeader'
-import editPage from './editPage'
+import homeHeader from './homeHeader'
+import Tables from './Table'
+import Tools from './Tools'
   export default {
     name: 'customerlist',
     components: {
-     editPage
+     homeHeader,Tables,Tools
     },
     data() {
       return {
+        name: '客户列表',
         list: ['全部客户', '我的客户', '下属客户', '重点客户', '我协作的', '下属协作的'],
+        select: [{placeholder:'客户状态', options:['存续','破产','倒闭']},{placeholder:'客户类型', options:['Vip','Svip','SSSVip']},{placeholder:'客户星级', options:['三星','四星','五星']}],
+        buttonList: [{name:'添加', buttontype:'primary', icontype:'ios-add', style:'width: 80px;margin-left:10px;font-size:16px;text-align:center'},
+                     {name:'导入', buttontype:'default', icontype:'md-download', style:'width: 80px;margin-left:10px;font-size:16px;text-align:center'},
+                     {name:'导出', buttontype:'default', icontype:'ios-refresh', style:'width: 80px;margin-left:10px;font-size:16px;text-align:center'},
+                     {name:'新建任务', buttontype:'default', icontype:'ios-options', style:'width: 120px;margin-left:10px;font-size:16px;text-align:center'},
+                     {name:'转移客户', buttontype:'default', icontype:'ios-build', style:'width: 120px;margin-left:10px;font-size:16px;text-align:center'},
+                     {name:'移入公海', buttontype:'default', icontype:'md-move', style:'width: 120px;margin-left:10px;font-size:16px;text-align:center'},
+                     {name:'合并客户', buttontype:'default', icontype:'md-contact', style:'width: 120px;margin-left:10px;font-size:16px;text-align:center'},],
         isActive: false,
-        Index: 0,
         modal6: false,
         loading: true,
         value1: '搜索关键词',
@@ -311,12 +227,7 @@ import editPage from './editPage'
       }
     },
     methods: {
-      selected(index) {
-        this.Index = index
-      },
-      handleSelectAll(status) {
-        this.$refs.selection.selectAll(status);
-      },
+      
       handleSubmit() {
         this.$refs.editPage.handleSubmit('formValidate')
       },
@@ -328,7 +239,7 @@ import editPage from './editPage'
 
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less">
+<style lang="less" scoped >
   .vertical-center-modal {
     display: flex;
     align-items: center;
@@ -342,7 +253,6 @@ import editPage from './editPage'
 
   .customerlist {
     background: #f0f2f5;
-
     .header {
       padding: 16px 0 0 16px;
       height: 50px;
@@ -351,49 +261,10 @@ import editPage from './editPage'
     }
 
     .content {
-      padding: 20px 180px;
+      padding: 80px 180px;
 
-      .top {
-
-        .ivu-card-head {
-          background: #f9f9f9;
-          font-size: 18px;
-          font-weight: bold;
-          text-align: center;
-
-          .title {
-            display: flex;
-            text-align: center;
-          }
-
-          span {
-            display: inline-block;
-            flex: 1;
-            font-weight: bold;
-
-            &:hover {
-              color: #0079fe;
-            }
-          }
-
-          .active {
-            color: #0079fe;
-          }
-        }
-      }
-
-      .table {
-        margin-top: 20px;
-        background: #fff;
-        padding: 20px;
-
-        .table-content {
-          margin-top: 20px;
-
-          .tools {
-            margin-top: 18px;
-          }
-        }
+      .tablewrapper {
+        margin-top: 10px;
       }
     }
   }

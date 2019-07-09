@@ -1,15 +1,11 @@
 <template>
   <div class="homeindex">
-       <div class="header">
-          <Breadcrumb separator=">">
-              <BreadcrumbItem ><Icon type="logo-buffer" size="24" /></BreadcrumbItem>
-              <BreadcrumbItem >一级分类</BreadcrumbItem>
-              <BreadcrumbItem >系统首页</BreadcrumbItem>
-          </Breadcrumb>
+       <div class="headerwrapper">
+          <homeHeader :name='name'></homeHeader>
        </div>
        <div class="content">
-          <div style="background:#eee;padding:  20px 220px">
-            <Card :bordered="false" style="width:100%">
+          <div>
+            <Card :bordered="false">
                 <p class='title' slot="title">快速新建</p>
                  <div>
                    <ul class='new'>
@@ -325,12 +321,17 @@
 <script>
 import G2 from '@antv/g2';
 import DataSet from '@antv/data-set';
+import homeHeader from './homeHeader'
 export default {
   name: 'homeindex',
   data() {
     return {
+      name: '系统首页',
       modal2: false
     }
+  },
+  components: {
+    homeHeader
   },
   mounted () {
         this.initChart1('arr1')
@@ -643,6 +644,7 @@ export default {
     background: #fff;
   }
   .content {
+    padding: 80px 180px;
     .title{
       font-size: 18px;
       font-weight: bold;

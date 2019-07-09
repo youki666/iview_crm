@@ -1,75 +1,47 @@
 <template>
-  <div class="customerlist">
-    <div class="header">
-      <Breadcrumb separator=">">
-        <BreadcrumbItem>
-          <Icon type="logo-buffer" size="24" />
-        </BreadcrumbItem>
-        <BreadcrumbItem>一级分类</BreadcrumbItem>
-        <BreadcrumbItem>客户列表</BreadcrumbItem>
-      </Breadcrumb>
-    </div>
-    <div class="content">
-      <div class="top">
-        <Card :bordered="false">
-          <p slot="title" class='title'>
-            <span v-for="(item, index) in list" :class="{active:Index==index}" :key="index"
-              @click="selected(index)">{{item}}</span>
-          </p>
-          <div class="tools">
-            <span><Input placeholder="搜索关键字" size="large" style="width: 180px" /></span>
-            <span>
-              <Select size="large" style="width:180px;margin-left:10px;" placeholder="客户状态">
-                <Option value="公司目标"></Option>
-                <Option value="子公司目标"></Option>
-                <Option value="集团目标"></Option>
-              </Select>
-            </span>
-            <span>
-              <Select size="large" style="width:180px;margin-left:10px;" placeholder="客户类型">
-                <Option value="公司目标"></Option>
-                <Option value="子公司目标"></Option>
-                <Option value="集团目标"></Option>
-              </Select>
-            </span>
-            <span>
-              <Select size="large" style="width:180px;margin-left:10px;" placeholder="客户星级">
-                <Option value="公司目标"></Option>
-                <Option value="子公司目标"></Option>
-                <Option value="集团目标"></Option>
-              </Select>
-            </span>
-            <span>
-              <DatePicker size="large" type="date" placeholder="最后跟进" style="width: 180px;margin-left:10px;">
-              </DatePicker>
-            </span>
-            <span><Button type="primary" style="width: 100px;margin-left:10px;font-size:16px;text-align:center">
-                <Icon type="ios-search" size='24' />查询</Button></span>
-            <span><Button type="default" style="width: 80px;margin-left:10px;font-size:16px;text-align:center">
-                <Icon type="ios-refresh" size='24' />重置</Button></span>
-            <span><Button type="text"
-                style="width: 120px;margin-left:10px;font-size:16px;text-align:center;color:#3293fe">
-                <Icon type="ios-funnel" size='24' />高级筛选</Button></span>
-          </div>
-        </Card>
-      </div>
-      <div class='tablewrapper'>
-            <Tables></Tables>   
-      </div>
-    </div>
-    
-  </div>
-</template>
+    <div class='table'>
+        <div class="table-header">
+          <Button v-for="button in buttonList" :key="button.id" :style="button.style" :type='button.buttontype'>
+            <Icon  :type="button.icontype" size='18' />{{button.name}}</Button>
 
+          <Button type="default" style="width: 120px;margin-left:10px;font-size:16px;text-align:center"
+            @click="modal6 = true">
+            <Icon type="ios-add" size='18' />批量编辑</Button>
+
+          <div class="rightwrapper">
+               <Rightbutton></Rightbutton>
+          </div>
+        </div>
+        <div class="table-content">
+          <Table border ref="selection" :columns="columns4" :data="data1"></Table>
+          <div class="tools">
+            <Button @click="handleSelectAll(true)">
+              <Icon type="md-checkbox" />全选</Button>
+            <Button @click="handleSelectAll(false)" style="text-align:center;margin-left:10px;">
+              <Icon type="ios-browsers-outline" />反选</Button>
+            <Button style="text-align:center;margin-left:10px;">更多操作
+              <Icon type="ios-arrow-down" /></Button>
+            <Page :total="100" show-sizer style="text-align:center;float:right;" />
+          </div>
+        </div>
+        <Modal v-model="modal6" title="批量编辑" :loading="loading" class-name="vertical-center-modal" ok-text="保存"
+          width="600px" @on-ok="handleSubmit" @on-cancel="handleReset">
+          <editPage ref="editPage" ></editPage>
+        </Modal>
+      </div>
+</template>
 <script>
-//import homeHeader from './homeHeader'
-import Tables from './../Home/Table'
-  export default {
-    name: 'customerlist',
-    components: {
-     Tables
+import editPage from './editPage'
+import Rightbutton from './Rightbutton'
+export default {
+  name: 'tables',
+  props: {
+    'buttonList': Array
+  },
+  components: {
+     editPage,Rightbutton
     },
-    data() {
+  data() {
       return {
         list: ['全部客户', '我的客户', '下属客户', '重点客户', '我协作的', '下属协作的'],
         isActive: false,
@@ -267,6 +239,9 @@ import Tables from './../Home/Table'
       selected(index) {
         this.Index = index
       },
+      handleSelectAll(status) {
+        this.$refs.selection.selectAll(status);
+      },
       handleSubmit() {
         this.$refs.editPage.handleSubmit('formValidate')
       },
@@ -274,75 +249,24 @@ import Tables from './../Home/Table'
         this.$refs.editPage.handleReset('formValidate')
       }
     }
-  }
-
+}
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less" scoped >
-  .vertical-center-modal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-    .ivu-modal {
-      top: 0;
-      font-size: 18px;
-    }
-  }
-
-  .customerlist {
-    background: #f0f2f5;
-    .header {
-      padding: 16px 0 0 16px;
-      height: 50px;
-      font-size: 24px;
-      background: #fff;
-    }
-
-    .content {
-      padding: 20px 180px;
-
-      .top {
-        .ivu-card-head {
-          background: #f9f9f9;
-          font-size: 18px;
-          font-weight: bold;
-          text-align: center;
-
-          .title {
-            display: flex;
-            text-align: center;
+<style lang="less">
+      .table {
+        background: #fff;
+        padding: 10px;
+        .table-header {
+          margin-top: 20px;
+          .rightwrapper {
+            float: right;
           }
-
-          span {
-            display: inline-block;
-            flex: 1;
-            font-weight: bold;
-
-            &:hover {
-              color: #0079fe;
-            }
-          }
-
-          .active {
-            color: #0079fe;
+        }
+        .table-content {
+          margin-top: 10px;
+          .tools {
+            margin-top: 18px;
           }
         }
       }
-      .tablewrapper {
-        margin-top: 10px;
-      }
-    }
-  }
-
-  .vertical-center-modal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .ivu-modal {
-      top: 0;
-    }
-  }
-
 </style>
