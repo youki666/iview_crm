@@ -1,12 +1,8 @@
 <template>
     <div class='table'>
         <div class="table-header">
-          <Button v-for="button in buttonList" :key="button.id" :style="button.style" :type='button.buttontype'>
+          <Button v-for="(button,index) in buttonList" :key="index" :style="button.style" :type='button.buttontype' @click=Showmodel(index)>
             <Icon  :type="button.icontype" size='18' />{{button.name}}</Button>
-
-          <Button type="default" style="width: 120px;margin-left:10px;font-size:16px;text-align:center"
-            @click="modal6 = true">
-            <Icon type="ios-add" size='18' />批量编辑</Button>
 
           <div class="rightwrapper">
                <Rightbutton></Rightbutton>
@@ -24,7 +20,15 @@
             <Page :total="100" show-sizer style="text-align:center;float:right;" />
           </div>
         </div>
-        <Modal v-model="modal6" title="批量编辑" :loading="loading" class-name="vertical-center-modal" ok-text="保存"
+        <Modal v-model="modal7" title="批量编辑" :loading="loading" class-name="vertical-center-modal" ok-text="保存"
+          width="600px" @on-ok="handleSubmit" @on-cancel="handleReset">
+          <editPage ref="editPage" ></editPage>
+        </Modal>
+        <Modal v-model="modal1" title=添加 :loading="loading" class-name="vertical-center-modal" ok-text="保存"
+          width="600px" @on-ok="handleSubmit" @on-cancel="handleReset">
+          <editPage ref="editPage" ></editPage>
+        </Modal>
+        <Modal v-model="modal2" title='导出' :loading="loading" class-name="vertical-center-modal" ok-text="保存"
           width="600px" @on-ok="handleSubmit" @on-cancel="handleReset">
           <editPage ref="editPage" ></editPage>
         </Modal>
@@ -41,12 +45,41 @@ export default {
   components: {
      editPage,Rightbutton
     },
+  methods: {
+      selected(index) {
+        this.Index = index
+      },
+      Showmodel(index){
+         if(index == 0){
+          this.modal1 = true
+         }else if(index ==1){
+          this.modal2 = true
+         }else if(index == 7){
+          this.modal7 = true
+         }
+      },
+      handleSelectAll(status) {
+        this.$refs.selection.selectAll(status);
+      },
+      handleSubmit() {
+        this.$refs.editPage.handleSubmit('formValidate')
+      },
+      handleReset(name) {
+        this.$refs.editPage.handleReset('formValidate')
+      }
+  },
   data() {
       return {
         list: ['全部客户', '我的客户', '下属客户', '重点客户', '我协作的', '下属协作的'],
         isActive: false,
         Index: 0,
+        modal1: false,
+        modal2: false,
+        modal3: false,
+        modal4: false,
+        modal5: false,
         modal6: false,
+        modal7: false,
         loading: true,
         value1: '搜索关键词',
         columns4: [{
@@ -233,20 +266,6 @@ export default {
             day: '30'
           }
         ]
-      }
-    },
-    methods: {
-      selected(index) {
-        this.Index = index
-      },
-      handleSelectAll(status) {
-        this.$refs.selection.selectAll(status);
-      },
-      handleSubmit() {
-        this.$refs.editPage.handleSubmit('formValidate')
-      },
-      handleReset(name) {
-        this.$refs.editPage.handleReset('formValidate')
       }
     }
 }

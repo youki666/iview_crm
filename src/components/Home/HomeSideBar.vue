@@ -18,6 +18,9 @@
                         <MenuItem name="5" to='/home/allOpp'>
                             全部商机
                         </MenuItem>
+                        <MenuItem name="6" to='/home/allOrder'>
+                            全部订单
+                        </MenuItem>
                     </MenuGroup>
                 </Menu>
         </div>

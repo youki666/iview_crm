@@ -1,13 +1,7 @@
 <template>
   <div class="newcustomer">
-    <div class="header">
-      <Breadcrumb separator=">">
-        <BreadcrumbItem>
-          <Icon type="logo-buffer" size="24" />
-        </BreadcrumbItem>
-        <BreadcrumbItem>一级分类</BreadcrumbItem>
-        <BreadcrumbItem>创建客户</BreadcrumbItem>
-      </Breadcrumb>
+    <div class="headerwrapper">
+       <homeHeader :name=name></homeHeader>
     </div>
     <div class="content">
       <div style="background:#eee;padding:  20px 220px">
@@ -210,11 +204,15 @@
 </template>
 
 <script>
+import homeHeader from './homeHeader'
   export default {
     name: 'newc',
-    components: {},
+    components: {
+      homeHeader
+    },
     data() {
       return {
+        name: '创建客户',
         valueDisabled: 4.5,
         single: true,
         single2: true,
@@ -293,7 +291,7 @@
   .newcustomer {
     background: #f0f2f5;
 
-    .header {
+    .headerwrapper {
       padding: 16px 0 0 16px;
       height: 50px;
       font-size: 24px;

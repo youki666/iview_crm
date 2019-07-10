@@ -1,14 +1,14 @@
 <template>
   <div class="customerlist">
     <div class="headerwrapper">
-       <homeHeader :name='name'></homeHeader>
+      <homeHeader :name='name'></homeHeader>
     </div>
     <div class="content">
-      <div class="topwrapper">
-          <Tools :list='list'  :select='select'></Tools>
+        <div class="toptopwrapper">
+          <Tools :list='list' :select='select'></Tools>
       </div>
       <div class='tablewrapper'>
-            <Tables :buttonList='buttonList'></Tables>
+            <Tables :buttonList='buttonList'></Tables> 
       </div>
     </div>
     
@@ -26,21 +26,18 @@ import Tools from './Tools'
     },
     data() {
       return {
-        name: '客户列表',
-        list: ['全部客户', '我的客户', '下属客户', '重点客户', '我协作的', '下属协作的'],
-        select: [{placeholder:'客户状态', options:['存续','破产','倒闭']},{placeholder:'客户类型', options:['Vip','Svip','SSSVip']},{placeholder:'客户星级', options:['三星','四星','五星']}],
-        buttonList: [{name:'添加', buttontype:'primary', icontype:'ios-add', style:'width: 80px;margin-left:10px;font-size:16px;text-align:center'},
-                     {name:'导入', buttontype:'default', icontype:'md-download', style:'width: 80px;margin-left:10px;font-size:16px;text-align:center'},
-                     {name:'导出', buttontype:'default', icontype:'ios-refresh', style:'width: 80px;margin-left:10px;font-size:16px;text-align:center'},
-                     {name:'新建任务', buttontype:'default', icontype:'ios-options', style:'width: 120px;margin-left:10px;font-size:16px;text-align:center'},
-                     {name:'转移客户', buttontype:'default', icontype:'ios-build', style:'width: 120px;margin-left:10px;font-size:16px;text-align:center'},
-                     {name:'移入公海', buttontype:'default', icontype:'md-move', style:'width: 120px;margin-left:10px;font-size:16px;text-align:center'},
-                     {name:'合并客户', buttontype:'default', icontype:'md-contact', style:'width: 120px;margin-left:10px;font-size:16px;text-align:center'},
-                     {name:'批量编辑', buttontype:'default', icontype:'ios-add', style:'width: 120px;margin-left:10px;font-size:16px;text-align:center'}],
+        name: '全部订单',
+        list: ['全部订单', '我的订单', '下属订单',  '我协作的', '下属协作'],
+        select: [{placeholder:'客户状态', options:['开业','转让','倒闭']},{placeholder:'客户类型', options:['会员','超级会员','钻石会员']},{placeholder:'客户星级', options:['1星','2星','3星']}],
+        buttonList: [{name:'添加',buttontype:'primary',icontype:'ios-add',style:'width: 80px;margin-left:10px;font-size:16px;text-align:center'},
+                     {name:'导入',buttontype:'default',icontype:'ios-refresh',style:'width: 80px;margin-left:10px;font-size:16px;text-align:center'},
+                     {name:'导出',buttontype:'default',icontype:'md-download',style:'width: 80px;margin-left:10px;font-size:16px;text-align:center'},
+                     {name:'转移订单',buttontype:'default',icontype:'ios-options',style:'width: 120px;margin-left:10px;font-size:16px;text-align:center'},
+                     {name:'添加协作',buttontype:'default',icontype:'ios-build',style:'width: 120px;margin-left:10px;font-size:16px;text-align:center'}],
         isActive: false,
+        Index: 0,
         modal6: false,
         loading: true,
-        value1: '搜索关键词',
         columns4: [{
             type: 'selection',
             width: 60,
@@ -228,7 +225,9 @@ import Tools from './Tools'
       }
     },
     methods: {
-      
+      selected(index) {
+        this.Index = index
+      },
       handleSubmit() {
         this.$refs.editPage.handleSubmit('formValidate')
       },
@@ -264,8 +263,29 @@ import Tools from './Tools'
     .content {
       padding: 80px 180px;
 
+      .top {
+        .ivu-card-head {
+          background: #f9f9f9;
+          font-size: 18px;
+          font-weight: bold;
+
+          span {
+            display: inline-block;
+            margin: 0 30px;
+            font-weight: bold;
+
+            &:hover {
+              color: #0079fe;
+            }
+          }
+
+          .active {
+            color: #0079fe;
+          }
+        }
+      }
       .tablewrapper {
-        margin-top: 10px;
+        margin-top: 20px;
       }
     }
   }
@@ -281,3 +301,5 @@ import Tools from './Tools'
   }
 
 </style>
+
+

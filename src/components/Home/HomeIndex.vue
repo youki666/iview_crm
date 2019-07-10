@@ -17,46 +17,60 @@
                         </div>
                      </li>
                     </router-link>
+                     <router-link to="/home/newclue" >
+                       <li>
+                        <div>
+                          <p class='icon'><Icon type="md-people" size="48"/></p>
+                          <p class='name'>新建线索</p>
+                        </div>
+                     </li>
+                     </router-link>
                      <li>
                         <div>
                           <p class='icon'><Icon type="md-people" size="48"/></p>
-                          <p class='name'>新建客户</p>
+                          <p class='name'>新建商机</p>
                         </div>
                      </li>
                      <li>
                         <div>
                           <p class='icon'><Icon type="md-people" size="48"/></p>
-                          <p class='name'>新建客户</p>
+                          <p class='name'>新建订单</p>
                         </div>
                      </li>
                      <li>
                         <div>
                           <p class='icon'><Icon type="md-people" size="48"/></p>
-                          <p class='name'>新建客户</p>
+                          <p class='name'>新建联系人</p>
                         </div>
                      </li>
                      <li>
                         <div>
                           <p class='icon'><Icon type="md-people" size="48"/></p>
-                          <p class='name'>新建客户</p>
+                          <p class='name'>写进跟进</p>
                         </div>
                      </li>
                      <li>
                         <div>
                           <p class='icon'><Icon type="md-people" size="48"/></p>
-                          <p class='name'>新建客户</p>
+                          <p class='name'>新建任务</p>
                         </div>
                      </li>
                      <li>
                         <div>
                           <p class='icon'><Icon type="md-people" size="48"/></p>
-                          <p class='name'>新建客户</p>
+                          <p class='name'>新建工单</p>
                         </div>
                      </li>
                      <li>
                         <div>
                           <p class='icon'><Icon type="md-people" size="48"/></p>
-                          <p class='name'>新建客户</p>
+                          <p class='name'>新建回款单</p>
+                        </div>
+                     </li>
+                     <li>
+                        <div>
+                          <p class='icon'><Icon type="md-people" size="48"/></p>
+                          <p class='name'>回款计划</p>
                         </div>
                      </li>
                    </ul>
@@ -644,7 +658,7 @@ export default {
     background: #fff;
   }
   .content {
-    padding: 80px 180px;
+    padding: 80px;
     .title{
       font-size: 18px;
       font-weight: bold;
@@ -658,6 +672,9 @@ export default {
         height: 120px;
         position: relative;
         color: #999;
+        .name {
+          width: 80px;
+        }
         div {
           width: 60px;
           height: 60px;

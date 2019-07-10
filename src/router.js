@@ -21,7 +21,9 @@ export default new Router({
         { path: '/home/manage', component: () => import(/* webpackChunkName: "about" */ './components/Home/manage.vue') },
         { path: '/home/saleinfo', component: () => import(/* webpackChunkName: "about" */ './components/Home/saleInfo.vue') },
         { path: '/home/newcustomer', component: () => import(/* webpackChunkName: "about" */ './components/Home/newCustomer.vue') },
-        { path: '/home/allOpp', component: () => import(/* webpackChunkName: "about" */ './components/Home/allOpp.vue') }
+        { path: '/home/allOpp', component: () => import(/* webpackChunkName: "about" */ './components/Home/allOpp.vue') },
+        { path: '/home/allOrder', component: () => import(/* webpackChunkName: "about" */ './components/Home/allOrder.vue') },
+        { path: '/home/newclue', component: () => import(/* webpackChunkName: "about" */ './components/Home/newclue.vue') }
       ],
       redirect: '/home/index'
     },
