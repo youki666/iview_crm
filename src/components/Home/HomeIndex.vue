@@ -25,12 +25,14 @@
                         </div>
                      </li>
                      </router-link>
-                     <li>
-                        <div>
-                          <p class='icon'><Icon type="md-people" size="48"/></p>
-                          <p class='name'>新建商机</p>
-                        </div>
-                     </li>
+                     <router-link to='/home/newbussiness'>
+                        <li>
+                            <div>
+                              <p class='icon'><Icon type="md-people" size="48"/></p>
+                              <p class='name'>新建商机</p>
+                            </div>
+                        </li>
+                     </router-link>
                      <li>
                         <div>
                           <p class='icon'><Icon type="md-people" size="48"/></p>
@@ -651,12 +653,6 @@ export default {
 <style scoped lang="less">
 .homeindex {
   background: #f0f2f5;
-  .header {
-    padding: 16px 0 0 16px;
-    height: 50px;
-    font-size: 24px;
-    background: #fff;
-  }
   .content {
     padding: 80px;
     .title{

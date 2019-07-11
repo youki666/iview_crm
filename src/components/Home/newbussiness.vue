@@ -8,7 +8,7 @@
         <Card :bordered="false">
           <p slot="title" class='title'>
             <Icon type="logo-buffer" size='24' />
-            添加线索
+            添加商机
           </p>
           <span class='icon' slot="extra">
             <span style="color:red">*</span>为必填项
@@ -134,7 +134,7 @@ export default {
   },
   data () {
          return {
-          name: '新建线索',
+          name: '新建商机',
           single: true,
           mode : '邮件通知',
           formValidate: {

@@ -254,13 +254,9 @@ import Tools from './Tools'
 
   .customerlist {
     background: #f0f2f5;
-    .header {
-      padding: 16px 0 0 16px;
-      height: 50px;
-      font-size: 24px;
-      background: #fff;
+    .headerwrapper {
+      position: relative;
     }
-
     .content {
       padding: 80px 180px;
 
