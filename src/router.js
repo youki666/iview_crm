@@ -36,9 +36,9 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './components/Customer/CustomerSideBar.vue'),
       children: [
         { path: '/customer/index', component: () => import(/* webpackChunkName: "about" */ './components/Customer/CustomerIndex.vue') },
-        { path: '/customer/customerList', component: () => import(/* webpackChunkName: "about" */ './components/Customer/CustomerList.vue') },
-        { path: '/', redirect: 'index' }
-      ]
+        { path: '/customer/customerList', component: () => import(/* webpackChunkName: "about" */ './components/Customer/CustomerList.vue') }
+      ],
+      redirect: '/customer/index'
     },
     {
       path: '/bussiness',
